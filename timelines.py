@@ -14,12 +14,14 @@ def partition(*data):
     
     
 def plotTimeLines(ids, start, end):
+    colors = ['green','blue','black','cyan']
     idset, segments = partition(ids, start, end)
     y = { idset[i]:i for i in range(len(idset))}
     
     for id, segment in zip(idset, segments):
-        for s, t in segment:       
+        for s, t in segment:
             l, = plot([s,t],[y[id],y[id]])
-            setp(l, color='black', label=str(id))
+            l.set(color = colors[y[id]%len(colors)])
+        setp(l, label=str(id))
 
     legend()
